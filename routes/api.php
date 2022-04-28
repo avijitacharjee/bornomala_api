@@ -21,4 +21,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/login',[AuthController::class, 'login']);
-Route::post('/add-q',[QuestionController::class, 'addQuestion']);
+
+//Question
+Route::post('/add-question',[QuestionController::class, 'addQuestion']);
+Route::get('/questions',[QuestionController::class,'allQuestions']);
+Route::post('/delete-question',[QuestionController::class,'deleteQuestion']);
+
