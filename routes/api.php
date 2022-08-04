@@ -26,4 +26,5 @@ Route::post('/login',[AuthController::class, 'login']);
 Route::post('/add-question',[QuestionController::class, 'addQuestion']);
 Route::get('/questions',[QuestionController::class,'allQuestions']);
 Route::post('/delete-question',[QuestionController::class,'deleteQuestion']);
+Route::post('/approve-question',[QuestionController::class,'approveQuestion']);
 

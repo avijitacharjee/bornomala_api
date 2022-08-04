@@ -11,6 +11,8 @@ class Question extends Model
     protected $fillable = [
         'image',
         'word',
-        'parts'
+        'parts',
+        'deleted',
+        'approved'
     ];
 }

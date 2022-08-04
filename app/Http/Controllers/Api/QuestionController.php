@@ -17,7 +17,9 @@ class QuestionController extends Controller
         $question = Question::create([
             'image'=>$img,
             'word'=>$request['word'],
-            'parts'=>$request['parts']
+            'parts'=>$request['parts'],
+            'deleted'=>0,
+            'approved'=>0,
         ]);
         return response()->json([
             'data' => $question,
@@ -28,7 +30,7 @@ class QuestionController extends Controller
     }
 
     public function allQuestions(Request $request){
-        $questions = Question::all();
+        $questions = Question::where("deleted","0")->get();
         return response()->json([
             'data' => $questions,
             'message' => 'Successfully retrieved',
@@ -38,9 +40,22 @@ class QuestionController extends Controller
 
     public function deleteQuestion(Request $request){
         $id = $request->id;
-        Question::where('id',$id)->delete();
+        $question = Question::find($id);
+        $question->deleted = "1";
+        $question->save();
         return response()->json([
-            'data' => $id,
+            'data' => $question,
+            'message'=>'Deleted',
+            'error' => false
+        ]);
+    }
+    public function approveQuestion(Request $request){
+        $id = $request->id;
+        $question = Question::find('id',$id);
+        $question->approved = "1";
+        $question->save();
+        return response()->json([
+            'data' => $question,
             'message'=>'Deleted',
             'error' => false
         ]);
